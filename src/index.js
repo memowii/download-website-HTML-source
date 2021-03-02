@@ -9,9 +9,12 @@ const options = program.opts();
 
 downloadPageSource(options);
 
-// cl && node index.js                                                    ✓
-// cl && node index.js -u                                                 ✓
-// cl && node index.js -u https//forbes                                   ✓
-// cl && node index.js -u https://www.forbes.com.mx                       ✓
-// cl && node index.js -u https://www.forbes.com.mx -p path source.html   
+// TEST CASES FROM CLI
+// cl && node src/index.js                                                                ✓
+// cl && node src/index.js -u                                                             ✓
+// cl && node src/index.js -u https//forbes                                               ✓
+// cl && node src/index.js -u https://www.forbes.com.mx                                   ✓
+// cl && node src/index.js -u https://www.forbes.com.mx -p path source.html               ✓
+// cl && node src/index.js -u https://www.forbes.com.mx -p path /home/memowii/source.html
+
 // /home/memowii/source.html, ../afile.html
