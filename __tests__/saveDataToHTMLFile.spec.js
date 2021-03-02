@@ -14,7 +14,7 @@ describe('saveDataToHTMLFile function', () => {
     consoleSpy.mockClear();
   });
 
-  test('it should save without a path argument.', () => {
+  test('should save with an undefined path argument', () => {
     const path = undefined,
       { host } = new URL(uri),
       data = fs.readFileSync(`${__dirname}/example.html`),
@@ -27,7 +27,7 @@ describe('saveDataToHTMLFile function', () => {
     fs.unlinkSync(cratedFile);
   });
 
-  test('it should try to save, but a file with that name already exists.', () => {
+  test('should save, but a file with that name already exists.', () => {
     const path = undefined,
       { host } = new URL(uri),
       data = fs.readFileSync(`${__dirname}/example.html`),
@@ -43,5 +43,30 @@ describe('saveDataToHTMLFile function', () => {
     );
 
     fs.unlinkSync(fileName);
+  });
+
+  test('should save, but the file extension is wrong.', () => {
+    const path = 'source.htmx',
+      host = undefined,
+      data = undefined;
+
+    saveDataToHTMLFile(path, host, data);
+
+    expect(console.error).toBeCalledTimes(1);
+    expect(console.error).toHaveBeenLastCalledWith(
+      "The file's extension must be .html.".error
+    );
+  });
+
+  test('should save the data to a given path (name).', () => {
+    const path = 'source.html',
+      { host } = new URL(uri),
+      data = fs.readFileSync(`${__dirname}/example.html`);
+
+    saveDataToHTMLFile(path, host, data);
+
+    expect(fs.lstatSync(path).isFile()).toBe(true);
+
+    fs.unlinkSync(path);
   });
 });

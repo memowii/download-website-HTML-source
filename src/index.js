@@ -13,5 +13,5 @@ downloadPageSource(options);
 // cl && node index.js -u                                                 ✓
 // cl && node index.js -u https//forbes                                   ✓
 // cl && node index.js -u https://www.forbes.com.mx                       ✓
-// cl && node index.js -u https://www.forbes.com.mx -p path source.html
+// cl && node index.js -u https://www.forbes.com.mx -p path source.html   
 // /home/memowii/source.html, ../afile.html
