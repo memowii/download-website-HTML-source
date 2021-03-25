@@ -5,16 +5,14 @@ const saveDataToHTMLFile = (path, host, data) => {
     const fileName = `${host}.html`;
 
     if (fs.existsSync(fileName)) {
-      console.error(`ERROR: The file ${fileName} already exists.`.error);
-      return;
+      throw new Error(`The file ${fileName} already exists.`);
     }
 
     fs.writeFileSync(fileName, data);
   } else {
     if (!path.startsWith('/') || !path.startsWith('../')) {
       if (!path.endsWith('.html')) {
-        console.error("The file's extension must be .html.".error);
-        return;
+        throw new Error("The file's extension must be .html.");
       }
 
       fs.writeFileSync(path, data);
