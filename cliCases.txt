@@ -1,0 +1,9 @@
+TEST CASES FROM CLI
+
+cl && node src/index.js                                                           ✓
+cl && node src/index.js -u                                                        ✓
+cl && node src/index.js -u https//forbes                                          ✓
+cl && node src/index.js -u https://www.forbes.com.ml                              ✓
+cl && node src/index.js -u https://www.forbes.com.mx                              ✓
+cl && node src/index.js -u https://www.forbes.com.mx -p source.html               ✓
+cl && node src/index.js -u https://www.forbes.com.mx -p /home/memowii/source.html ✓

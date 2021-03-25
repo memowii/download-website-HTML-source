@@ -9,19 +9,30 @@ const saveDataToHTMLFile = (path, host, data) => {
     }
 
     fs.writeFileSync(fileName, data);
-  } else {
-    if (!path.startsWith('/') || !path.startsWith('../')) {
-      if (!path.endsWith('.html')) {
-        throw new Error("The file's extension must be .html.");
-      }
 
-      fs.writeFileSync(path, data);
+    return;
+  }
+
+  if (path.startsWith('/') || path.startsWith('../')) {
+    const splitPath = path.split('/');
+    const fileName = splitPath[splitPath.length - 1];
+
+    if (!fileName.endsWith('.html')) {
+      throw new Error("The file's extension must be .html.");
     }
+
+    if (fs.existsSync(path)) {
+      throw new Error(`The file ${fileName} already exists.`);
+    }
+
+    fs.writeFileSync(path, data);
+  } else {
+    if (!path.endsWith('.html')) {
+      throw new Error("The file's extension must be .html.");
+    }
+
+    fs.writeFileSync(path, data);
   }
 };
 
 module.exports = saveDataToHTMLFile;
-
-// console.log(__dirname);
-// console.log(fs.lstatSync(__dirname+"/"+"../somefile.txt").isFile());
-// console.log(path.split("/"));

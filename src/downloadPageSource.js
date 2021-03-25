@@ -7,17 +7,21 @@ const downloadPageSource = async ({ uri, path }) => {
     throw new Error('The entered uri is not a well-formed HTTP or HTTPS uri.');
   }
 
+  let HTMLData, host;
+
   try {
     const { status, data } = await get(uri);
     if (status === 200) {
-      const { host } = new URL(uri);
-      saveDataToHTMLFile(path, host, data);
+      HTMLData = data;
+      host = new URL(uri).host;
     }
-  } catch ({ message }) {
+  } catch (error) {
     throw new Error(
-      `Something went wrong while fetching the web page: ${message}`
+      `Something went wrong while fetching the web page: ${error.message}`
     );
   }
+
+  saveDataToHTMLFile(path, host, HTMLData);
 };
 
 module.exports = downloadPageSource;
